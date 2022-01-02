@@ -1,7 +1,6 @@
 package es.florida.ae4;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
@@ -18,15 +17,27 @@ public class Peticion implements Runnable {
 	PrintWriter pw;
 	Socket socket;
 
+	// Constructor: Peticion
+	// Descripcion: constructor que recibe un socket para transportar el socket del servidor al hilo
+	// Parametros de entrada: Socket
+	// Parametros de salida: no.
 	public Peticion(Socket socket) {
 		this.socket = socket;
 	}
 	
+	// Metodo: isAsciiPrintable
+	// Descripcion: metodo que segun un caracter te devuelve true si esta dentro de los caracteres imprimibles o false si no lo esta
+	// Parametros de entrada: Char
+	// Parametros de salida: no.
 	public static boolean isAsciiPrintable(char ch) {
 	      return ch >= 32 && ch < 127;
 	  }
 	
-	public String encriptarascii(String plano) {
+	// Metodo: encriptarAscii
+	// Descripcion: metodo que encripta un texto a su valor en Ascii
+	// Parametros de entrada: String
+	// Parametros de salida: no.
+	public String encriptarAscii(String plano) {
 		String[] planoarr = plano.split("");
 		String encriptado = "";
 		for(String s:planoarr) {
@@ -40,6 +51,10 @@ public class Peticion implements Runnable {
 		return encriptado;
 	}
 	
+	// Metodo: getMd5
+	// Descripcion: metodo que encripta un texto a su valor en MD5
+	// Parametros de entrada: String
+	// Parametros de salida: no.
 	public static String getMd5(String input)
     {
         try {
@@ -62,7 +77,10 @@ public class Peticion implements Runnable {
         }
     }
 	
-
+	// Metodo: run
+	// Descripcion: metodo que gestiona toda la funcionalidad del hilo
+	// Parametros de entrada: no.
+	// Parametros de salida: no.
 	public void run() {
 		try {
 			
@@ -88,7 +106,7 @@ public class Peticion implements Runnable {
 			String linea = bfr.readLine();
 			System.err.println("SERVIDOR >> Leo tipo de encriptacion");
 			if(linea.equals("ascii")) {
-				cMod.setEncriptado(encriptarascii(cMod.plano));
+				cMod.setEncriptado(encriptarAscii(cMod.plano));
 			} else {
 				cMod.setEncriptado(getMd5(cMod.plano));
 			}
@@ -98,8 +116,6 @@ public class Peticion implements Runnable {
 			System.err.println("SERVIDOR >> Envio a cliente objeto contraseña con encriptacion");
 			outObjeto.close();
 			inObjeto.close ();
-//			cliente.close ();
-//			servidor.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.err.println("SERVIDOR >>> Error.");

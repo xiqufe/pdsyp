@@ -6,6 +6,10 @@ import java.net.Socket;
 
 public class Servidor {
 
+	// Metodo: main
+	// Descripcion: metodo que gestion la parte servidor de la aplicacion
+	// Parametros de entrada: String[]
+	// Parametros de salida: no.
 	public static void main(String[] args) throws IOException {
 		System.err.println("SERVIDOR >>> Arranca el servidor, espera peticion");
 		ServerSocket socketEscucha = null;

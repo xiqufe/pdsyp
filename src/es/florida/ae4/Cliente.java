@@ -14,6 +14,10 @@ import java.util.Scanner;
 
 public class Cliente {
 
+	// Metodo: main
+	// Descripcion: metodo que gestion la parte cliente de la aplicacion
+	// Parametros de entrada: String[]
+	// Parametros de salida: no.
 	public static void main(String[] arg) throws UnknownHostException, IOException, ClassNotFoundException {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("CLIENTE >>> Arranca cliente");
@@ -51,5 +55,6 @@ public class Cliente {
 		inObjeto.close();
 		cMod.close();
 		socket.close();
+		sc.close();
 	}
 }
